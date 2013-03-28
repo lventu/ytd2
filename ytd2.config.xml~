@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+<http_proxy/>
+<targetfolder>/home/luca/Musica/</targetfolder>
+<videobutton>2</videobutton>
+<mpgbutton>true</mpgbutton>
+</configuration>
