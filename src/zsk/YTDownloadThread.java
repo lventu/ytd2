@@ -78,7 +78,15 @@ public class YTDownloadThread extends Thread {
 
 	static int iThreadcount = 0;
 	
+	public static int getiThreadcount() {
+		return iThreadcount;
+	}
+
 	int iThreadNo = YTDownloadThread.iThreadcount++; // every download thread get its own number
+	private static YTDEventDispatcher eventDispatcher = new YTDEventDispatcher(); // notify changes
+	public static YTDEventDispatcher getEventDispatcher() {
+		return eventDispatcher;
+	}
 	
 	final String ssourcecodeurl = "http://";
 	final String ssourcecodeuri = "[a-zA-Z0-9%&=\\.]";
@@ -831,7 +839,8 @@ public class YTDownloadThread extends Thread {
 					JFCMainClient.removeURLFromList(this.sURL);
 				else
 					JFCMainClient.removeURLFromList(JFCMainClient.szDLSTATE.concat(this.sURL));
-				
+				// notify download complete
+				eventDispatcher.threadNumberChanged(JFCMainClient.dlm.size());
 			} catch (InterruptedException e) {
 				this.bisinterrupted = true;
 			} catch (NullPointerException npe) {
